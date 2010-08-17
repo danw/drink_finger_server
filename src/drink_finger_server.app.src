@@ -1,0 +1,11 @@
+{application, drink_finger_server,
+ [{description, "Drink Finger Server"},
+  {vsn, "1.0"},
+  {modules, [finger_server_app,
+             finger_server_sup,
+             finger_server]},
+  {registered,[]},
+  {applications, [kernel, stdlib, sasl, ssl, drink]},
+  {mod, {finger_server_app, []}},
+  {start_phases, []}
+]}.
