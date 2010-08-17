@@ -38,12 +38,12 @@ init ([]) ->
     case application:get_env(port) of
         {ok, Port} ->
             {ok, {{one_for_one, 10, 3},  % One for one restart, shutdown after 10 restarts within 3 seconds
-               [{finger_server,     % Our first child, the drink_machine_listener
-                 {gen_listener, start_link, [Port, {finger_server, start_link, []}]},
+               [{finger_server,        % Our first child, the drink_machine_listener
+                 {dw_gen_listener, start_link, [Port, {finger_server, start_link, []}]},
                  permanent,            % Always restart
                  100,                  % Allow 10 seconds for it to shutdown
                  worker,               % It isn't a supervisor
-                 [gen_listener, finger_server]}]}};
+                 [dw_gen_listener, finger_server]}]}};
         Err ->
             error_logger:error_msg("Unknown port ~p~n", [Err]),
             {error, invalid_port}
